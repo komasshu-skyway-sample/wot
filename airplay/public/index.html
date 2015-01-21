@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>AirPlay API test</title>
+    <link rel="stylesheet" href="./highlight/styles/default.css">
+    <script src="./highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body>
+    <h1>AirPlay API test</h1>
+    <p>
+    <h2>Demo</h2>
+    <video id="video" src="./movie/big_buck_bunny.mp4" controls></video>
+    <div id="controls">
+      <button id="playButton">Play</button>
+      <button id="pauseButton" disabled>Pause</button>
+      <button id="airPlayButton" disabled>AirPlay</button>
+    </div>
+    </p>
+
+    <p>
+    <h2>AirPlay API snipet</h2>
+    <pre><code class="javascript">
+    // AirPlayデバイス発見の状態が変わった時
+    video.addEventListener('webkitplaybacktargetavailabilitychanged', function(event) {
+      switch (event.availability) {
+      case "available":
+        // AirPlayデバイスが存在
+        airPlayButton.disabled = false;  // ピッカーボタンを表示
+        break;
+      case "not-available":
+        // AirPlayデバイスがなくなった
+        airPlayButton.disabled = true; // ピッカーボタンを隠す
+        break;
+      }
+    }, false);
+
+    // ピッカーボタンがクリックされた時
+    airPlayButton.addEventListener('click', function(event) {
+      // AirPlayデバイス選択のピッカーを表示
+      video.webkitShowPlaybackTargetPicker();
+    })
+    </code></pre>
+    </p>
+
+    <script>
+    var video = document.getElementById("video");
+
+    var playBtn = document.getElementById("playButton")
+      , pauseBtn = document.getElementById("pauseButton")
+      , airPlayBtn = document.getElementById("airPlayButton")
+
+    playBtn.onclick = function(ev) {
+      video.play();
+      playBtn.disabled = true;
+      pauseBtn.disabled = false;
+    }
+
+    pauseBtn.onclick = function(ev) {
+      video.pause();
+      playBtn.disabled = false;
+      pauseBtn.disabled = true;
+    }
+
+    if (window.WebKitPlaybackTargetAvailabilityEvent) {
+      // AirPlayデバイス発見の状態が変わった時
+      video.addEventListener('webkitplaybacktargetavailabilitychanged', function(event) {
+        switch (event.availability) {
+        case "available":
+          // AirPlayデバイスが存在
+          airPlayButton.disabled = false;  // ピッカーボタンを有効化
+          break;
+        case "not-available":
+          // AirPlayデバイスがなくなった
+          airPlayButton.disabled = true; // ピッカーボタンを無効化
+          break;
+        }
+      }, false);
+
+      // ピッカーボタンがクリックされた時
+      airPlayButton.addEventListener('click', function(event) {
+        // AirPlayデバイス選択のピッカーを表示
+        video.webkitShowPlaybackTargetPicker();
+      })
+    }
+    </script>
+  </body>
+</html>
