@@ -1,6 +1,6 @@
-Web of Things demo
+# Web of Things demo
 
-# AirPlay API
+## AirPlay API
 
 1. download video
 
@@ -21,6 +21,6 @@ $ npm install
 $ bin/www
 ```
 
-## known issue
+### known issue
 
 iPad (iOS8.1.2) works well, however iPhone with same version doesn't work with picker (nothing appear)
