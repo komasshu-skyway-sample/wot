@@ -21,4 +21,6 @@ $ npm install
 $ bin/www
 ```
 
+## known issue
 
+iPad (iOS8.1.2) works well, however iPhone with same version doesn't work with picker (nothing appear)
