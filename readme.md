@@ -7,6 +7,7 @@
 ```
 $ cd airplay/public
 $ mkdir movie
+$ cd movie
 $ wget http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4
 ```
 
